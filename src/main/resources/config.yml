@@ -1,0 +1,17 @@
+# Enable or Disable Join Protection (true/false)
+Enable: true
+
+# Join Protection Time in seconds
+ProtectionTime: 15
+
+# Can Player Move on Protection Time (true/false)
+EnableMovement: true
+
+# You can use Colorcodes: "&"
+# You can use %time% for the seconds
+Messages:
+  CooldownStart: "&2Protection time started! &6%time% seconds left!"
+  CooldownEnded: "&4Protection time ended! &cYou are now vulnerable!"
+
+# Never edit this!
+Version: 1.0
