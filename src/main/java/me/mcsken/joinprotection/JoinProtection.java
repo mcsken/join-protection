@@ -27,9 +27,7 @@ public final class JoinProtection extends JavaPlugin implements Listener {
 
     public void onEnable() {
         instance = this;
-
         saveDefaultConfig();
-
         getServer().getPluginManager().registerEvents(this, this);
 
         this.enable = getConfig().getBoolean("Enable");
@@ -51,11 +49,10 @@ public final class JoinProtection extends JavaPlugin implements Listener {
         }
     }
 
-
     @EventHandler
-    public void ProtectionTime(PlayerJoinEvent event) {
+    public void onJoin(PlayerJoinEvent event) {
         final Player player = event.getPlayer();
-        if (this.enable && !player.hasPermission("joinprotection.ignore")) {
+        if (this.enable && player.hasPermission("joinProtection.on")) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(getInstance(), () -> {
                 player.sendMessage(JoinProtection.this.messageStart);
                 player.setNoDamageTicks(JoinProtection.this.seconds * 20);
@@ -73,8 +70,5 @@ public final class JoinProtection extends JavaPlugin implements Listener {
                 }
             }, this.seconds * 20L);
         }
-    }
-
-    public void onDisable() {
     }
 }
