@@ -1,17 +1,29 @@
 # Enable or Disable Join Protection (true/false)
-Enable: true
+joinProtectionEnable: true
 
 # Join Protection Time in seconds
-ProtectionTime: 20
+joinProtectionTime: 20
 
-# Can Player Move during Protection Time (true/false)
-EnableMovement: true
+# Can Player Move during Join Protection Time (true/false)
+joinEnableMovement: true
+
+# Enable or Disable Dimension Change Protection (true/false)
+dimensionProtectionEnable: true
+
+# Dimension Protection Time in seconds
+dimensionProtectionTime: 15
+
+# Can Player Move during Dimension Protection Time (true/false)
+dimensionEnableMovement: true
 
 # You can use Colorcodes: "&"
-# You can use %time% for the seconds
+# You can use %time% to show remaining seconds
 Messages:
-  CooldownStart: "&2Protection time started! &6%time% seconds left!"
-  CooldownEnded: "&4Protection time ended! &cYou are now vulnerable!"
+  joinCooldownStart: "&2Protection time started! &6%time% seconds left!"
+  joinCooldownEnded: "&4Protection time ended! &cYou are now vulnerable!"
+  dimensionCooldownStart: "&2Protection time started! &6%time% seconds left!"
+  dimensionCooldownEnded: "&4Protection time ended! &cYou are now vulnerable!"
+
 
 # Do not change, dev only.
 Version: 0.1.1
