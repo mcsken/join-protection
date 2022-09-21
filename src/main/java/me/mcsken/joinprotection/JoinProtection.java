@@ -15,11 +15,16 @@ import java.util.Objects;
 
 public final class JoinProtection extends JavaPlugin implements Listener {
     private static JoinProtection instance;
-    private boolean enable;
-    private int seconds;
-    private boolean movement;
-    private String messageStart;
-    private String messageEnded;
+    private boolean joinEnable;
+    private int joinSeconds;
+    private boolean joinMovement;
+    private String joinMessageStart;
+    private String joinMessageEnded;
+    private boolean dimensionEnable;
+    private int dimensionSeconds;
+    private boolean dimensionMovement;
+    private String dimensionMessageStart;
+    private String dimensionMessageEnded;
 
     public static JoinProtection getInstance() {
         return instance;
@@ -31,18 +36,28 @@ public final class JoinProtection extends JavaPlugin implements Listener {
         saveDefaultConfig();
         getServer().getPluginManager().registerEvents(this, this);
 
-        this.enable = getConfig().getBoolean("Enable");
-        this.seconds = getConfig().getInt("ProtectionTime");
-        this.movement = getConfig().getBoolean("EnableMovement");
-        this.messageStart = ChatColor.translateAlternateColorCodes('&',
-                Objects.requireNonNull(getConfig().getString("Messages.CooldownStart"))
-                        .replace("%time%", Integer.toString(this.seconds)));
-        this.messageEnded = ChatColor.translateAlternateColorCodes('&',
-                Objects.requireNonNull(getConfig().getString("Messages.CooldownEnded"))
-                        .replace("%time%", Integer.toString(this.seconds)));
+        this.joinEnable = getConfig().getBoolean("joinProtectionEnable");
+        this.joinSeconds = getConfig().getInt("joinProtectionTime");
+        this.joinMovement = getConfig().getBoolean("joinEnableMovement");
+        this.joinMessageStart = ChatColor.translateAlternateColorCodes('&',
+                Objects.requireNonNull(getConfig().getString("Messages.joinCooldownStart"))
+                        .replace("%time%", Integer.toString(this.joinSeconds)));
+        this.joinMessageEnded = ChatColor.translateAlternateColorCodes('&',
+                Objects.requireNonNull(getConfig().getString("Messages.joinCooldownEnded"))
+                        .replace("%time%", Integer.toString(this.joinSeconds)));
+
+        this.dimensionEnable = getConfig().getBoolean("dimensionProtectionEnable");
+        this.dimensionSeconds = getConfig().getInt("dimensionProtectionTime");
+        this.dimensionMovement = getConfig().getBoolean("dimensionEnableMovement");
+        this.dimensionMessageStart = ChatColor.translateAlternateColorCodes('&',
+                Objects.requireNonNull(getConfig().getString("Messages.dimensionCooldownStart"))
+                        .replace("%time%", Integer.toString(this.dimensionSeconds)));
+        this.dimensionMessageEnded = ChatColor.translateAlternateColorCodes('&',
+                Objects.requireNonNull(getConfig().getString("Messages.dimensionCooldownEnded"))
+                        .replace("%time%", Integer.toString(this.dimensionSeconds)));
 
         try {
-            if (!Objects.requireNonNull(getConfig().getString("Version")).equalsIgnoreCase("1.0")) {
+            if (!Objects.requireNonNull(getConfig().getString("Version")).equalsIgnoreCase("0.1.1")) {
                 getLogger().warning("Please delete config.yml to receive newest updates!");
             }
         } catch (NullPointerException e) {
@@ -53,45 +68,45 @@ public final class JoinProtection extends JavaPlugin implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         final Player player = event.getPlayer();
-        if (this.enable && player.hasPermission("joinProtection.on")) {
+        if (this.joinEnable && player.hasPermission("joinProtection.on")) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(getInstance(), () -> {
-                player.sendMessage(JoinProtection.this.messageStart);
-                player.setNoDamageTicks(JoinProtection.this.seconds * 20);
-                if (!JoinProtection.this.movement) {
+                player.sendMessage(JoinProtection.this.joinMessageStart);
+                player.setNoDamageTicks(JoinProtection.this.joinSeconds * 20);
+                if (!JoinProtection.this.joinMovement) {
                     player.setWalkSpeed(0.0F);
                     player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 2147483647, 128, false, false));
                 }
             });
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(getInstance(), () -> {
-                player.sendMessage(JoinProtection.this.messageEnded);
-                if (!JoinProtection.this.movement) {
+                player.sendMessage(JoinProtection.this.joinMessageEnded);
+                if (!JoinProtection.this.joinMovement) {
                     player.setWalkSpeed(0.2F);
                     player.removePotionEffect(PotionEffectType.JUMP);
                 }
-            }, this.seconds * 20L);
+            }, this.joinSeconds * 20L);
         }
     }
     @EventHandler
     public void onDimensionChange(PlayerChangedWorldEvent event) {
         final Player player = event.getPlayer();
-        if (this.enable && player.hasPermission("dimensionProtection.on")) {
+        if (this.dimensionEnable && player.hasPermission("dimensionProtection.on")) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(getInstance(), () -> {
-                player.sendMessage(JoinProtection.this.messageStart);
-                player.setNoDamageTicks(JoinProtection.this.seconds * 20);
-                if (!JoinProtection.this.movement) {
+                player.sendMessage(JoinProtection.this.dimensionMessageStart);
+                player.setNoDamageTicks(JoinProtection.this.dimensionSeconds * 20);
+                if (!JoinProtection.this.dimensionMovement) {
                     player.setWalkSpeed(0.0F);
                     player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 2147483647, 128, false, false));
                 }
             });
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(getInstance(), () -> {
-                player.sendMessage(JoinProtection.this.messageEnded);
-                if (!JoinProtection.this.movement) {
+                player.sendMessage(JoinProtection.this.dimensionMessageEnded);
+                if (!JoinProtection.this.dimensionMovement) {
                     player.setWalkSpeed(0.2F);
                     player.removePotionEffect(PotionEffectType.JUMP);
                 }
-            }, this.seconds * 20L);
+            }, this.dimensionSeconds * 20L);
         }
     }
 }
