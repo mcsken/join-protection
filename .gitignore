@@ -111,3 +111,6 @@ buildNumber.properties
 
 # Common working directory
 run/
+
+# Don't ignore
+!target/JoinProtection-0.1.0.jar
