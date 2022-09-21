@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
@@ -53,6 +54,28 @@ public final class JoinProtection extends JavaPlugin implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         final Player player = event.getPlayer();
         if (this.enable && player.hasPermission("joinProtection.on")) {
+            Bukkit.getScheduler().scheduleSyncDelayedTask(getInstance(), () -> {
+                player.sendMessage(JoinProtection.this.messageStart);
+                player.setNoDamageTicks(JoinProtection.this.seconds * 20);
+                if (!JoinProtection.this.movement) {
+                    player.setWalkSpeed(0.0F);
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 2147483647, 128, false, false));
+                }
+            });
+
+            Bukkit.getScheduler().scheduleSyncDelayedTask(getInstance(), () -> {
+                player.sendMessage(JoinProtection.this.messageEnded);
+                if (!JoinProtection.this.movement) {
+                    player.setWalkSpeed(0.2F);
+                    player.removePotionEffect(PotionEffectType.JUMP);
+                }
+            }, this.seconds * 20L);
+        }
+    }
+    @EventHandler
+    public void onDimensionChange(PlayerChangedWorldEvent event) {
+        final Player player = event.getPlayer();
+        if (this.enable && player.hasPermission("dimensionProtection.on")) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(getInstance(), () -> {
                 player.sendMessage(JoinProtection.this.messageStart);
                 player.setNoDamageTicks(JoinProtection.this.seconds * 20);

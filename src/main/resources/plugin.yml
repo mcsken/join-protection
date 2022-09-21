@@ -12,3 +12,9 @@ permissions:
   joinProtection.off:
     description: Disables join protection for specified user/group, all by default.
     default: false
+  dimensionProtection.on:
+    description: Gives join protection.
+    default: true
+  dimensionProtection.off:
+    description: Gives join protection.
+    default: false
