@@ -3,12 +3,18 @@ version: '${project.version}'
 main: me.mcsken.joinprotection.JoinProtection
 api-version: 1.19
 authors: [ mcsken ]
-description: A plugin to protect players while loading when first joined and while changing dimensions.
+description: Efficient Spigot plugin that protects players from damage while loading and waiting for connection to stabilise.
 website: https://github.com/mcsken
 permissions:
-  joinProtection.on:
-    description: Enables join protection for specified user/group, all by default.
+  enableProtection.join:
+    description: Enables join protection for specified user/group (given to all by default).
     default: true
-  joinProtection.off:
-    description: Disables join protection for specified user/group, all by default.
+  enableProtection.dimension:
+    description: Enables dimension protection for specified user/group (given to all by default).
+    default: true
+  disableProtection.join:
+    description: Disables join protection for specified user/group.
+    default: false
+  disableProtection.dimension:
+    description: Disables dimension protection for specified user/group.
     default: false
