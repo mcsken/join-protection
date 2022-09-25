@@ -68,7 +68,7 @@ public final class JoinProtection extends JavaPlugin implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         final Player player = event.getPlayer();
-        if (this.joinEnable && player.hasPermission("joinProtection.on")) {
+        if (this.joinEnable && player.hasPermission("protection.join.on")) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(getInstance(), () -> {
                 player.sendMessage(JoinProtection.this.joinMessageStart);
                 player.setNoDamageTicks(JoinProtection.this.joinSeconds * 20);
@@ -90,7 +90,7 @@ public final class JoinProtection extends JavaPlugin implements Listener {
     @EventHandler
     public void onDimensionChange(PlayerChangedWorldEvent event) {
         final Player player = event.getPlayer();
-        if (this.dimensionEnable && player.hasPermission("dimensionProtection.on")) {
+        if (this.dimensionEnable && player.hasPermission("protection.dimension.on")) {
             Bukkit.getScheduler().scheduleSyncDelayedTask(getInstance(), () -> {
                 player.sendMessage(JoinProtection.this.dimensionMessageStart);
                 player.setNoDamageTicks(JoinProtection.this.dimensionSeconds * 20);

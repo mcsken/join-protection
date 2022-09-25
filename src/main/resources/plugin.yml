@@ -6,15 +6,15 @@ authors: [ mcsken ]
 description: Efficient SpigotMC plugin for preventing damage during player login and dimension change.
 website: https://github.com/mcsken
 permissions:
-  joinProtection.on:
+  protection.join.on:
     description: Enables join protection for specified user/group, all by default.
-    default: true
-  joinProtection.off:
+    default: false
+  protection.join.off:
     description: Disables join protection for specified user/group.
-    default: false
-  dimensionProtection.on:
-    description: Enables dimension protection for specified user/group, all by default.
     default: true
-  dimensionProtection.off:
-    description: Disables dimension protection for specified user/group.
+  protection.dimension.on:
+    description: Enables dimension protection for specified user/group, all by default.
     default: false
+  protection.dimension.off:
+    description: Disables dimension protection for specified user/group.
+    default: true
