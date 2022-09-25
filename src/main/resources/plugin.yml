@@ -9,12 +9,6 @@ permissions:
   enableProtection.join:
     description: Enables join protection for specified user/group (given to all by default).
     default: true
-  enableProtection.dimension:
-    description: Enables dimension protection for specified user/group (given to all by default).
-    default: true
   disableProtection.join:
     description: Disables join protection for specified user/group.
-    default: false
-  disableProtection.dimension:
-    description: Disables dimension protection for specified user/group.
     default: false
