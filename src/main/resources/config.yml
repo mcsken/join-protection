@@ -1,28 +1,28 @@
 # Enable or Disable Join Protection (true/false)
-joinProtectionEnable: true
+joinEnableProtection: true
 
 # Join Protection Time in seconds
-joinProtectionTime: 20
+joinTimeProtection: 20
 
 # Can Player Move during Join Protection Time (true/false)
-joinEnableMovement: true
+joinMovementAllow: true
 
 # Enable or Disable Dimension Change Protection (true/false)
-dimensionProtectionEnable: true
+dimensionEnableProtection: true
 
-# Dimension Protection Time in seconds
-dimensionProtectionTime: 15
+# Dimension Change Protection Time in seconds
+dimensionTimeProtection: 10
 
-# Can Player Move during Dimension Protection Time (true/false)
-dimensionEnableMovement: true
+# Can Player Move during Dimension Change Protection Time (true/false)
+dimensionMovementAllow: true
 
-# You can use Colorcodes: "&"
+# You can use color codes to color the messages text: https://www.spigotmc.org/wiki/textcosmetics-colors-and-formats/
 # You can use %time% to show remaining seconds
 Messages:
-  joinCooldownStart: "&2Protection time started! &6%time% seconds left!"
-  joinCooldownEnded: "&4Protection time ended! &cYou are now vulnerable!"
-  dimensionCooldownStart: "&2Protection time started! &6%time% seconds left!"
-  dimensionCooldownEnded: "&4Protection time ended! &cYou are now vulnerable!"
+  joinCooldownStart: "&2You are protected for &6%time% seconds&2!"
+  joinCooldownEnded: "&cYou are no longer protected!"
+  dimensionCooldownStart: "&2You are protected for &6%time% seconds&2!"
+  dimensionCooldownEnded: "&cYou are no longer protected!"
 
 
 # Do not change, dev only.
